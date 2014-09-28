@@ -14,8 +14,9 @@ var rename  = require('gulp-rename');
 var sh      = require('shelljs');
 
 var paths = {
-  app: ['./app/**/*.coffee'],
+  app: ['./app/scripts/**/*.coffee'],
   sass: ['./scss/**/*.scss'],
+  style: ['./app/styles/**/*.scss'],
   template: ['./app/templates/**/*.jade']
 };
 
@@ -52,6 +53,13 @@ gulp.task('jade:prod', function() {
     .pipe(gulp.dest('./www/dist/js/'));
 });
 
+gulp.task('style', function() {
+  gulp.src(paths.style)
+    .pipe(sass())
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest('./www/css/'));
+});
+
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
@@ -70,8 +78,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.template, ['jade']);
 });
 
-gulp.task('build',      ['sass', 'make', 'jade']);
-gulp.task('build:prod', ['sass', 'make:prod', 'jade:prod']);
+gulp.task('build',      ['sass', 'make', 'jade', 'style']);
+gulp.task('build:prod', ['sass', 'make:prod', 'jade:prod', 'style']); // todo: add `style:prod`
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
