@@ -1,4 +1,4 @@
-app = angular.module 'app', ['ionic']
+app = angular.module 'app', ['ionic', 'ngStorage']
 
 app.run ($ionicPlatform) ->
   $ionicPlatform.ready ->

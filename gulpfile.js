@@ -76,6 +76,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.app, ['make']);
   gulp.watch(paths.template, ['jade']);
+  gulp.watch(paths.style, ['style']);
 });
 
 gulp.task('build',      ['sass', 'make', 'jade', 'style']);

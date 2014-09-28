@@ -1,0 +1,11 @@
+ion-modal-view
+  ion-header-bar.bar-positive
+    h1.title Aggiungi Esame
+  ion-content.has-header
+    div.list
+      label.item.item-input
+        input(type='text', placeholder='Nome', ng-model='exam.name')
+      label.item.item-input
+        input(type='text', placeholder='Voto ottenuto', ng-model='exam.score')
+    div.padding
+      button.button.button-positive(ng-click='saveExam()') Salva

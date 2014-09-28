@@ -1,2 +1,6 @@
 node_modules/
-www/
+www/lib/
+www/css/
+www/dist/
+www/js/
+www/templates/

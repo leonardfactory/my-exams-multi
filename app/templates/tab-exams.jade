@@ -1,2 +1,12 @@
 ion-view(title='Esami')
+  ion-nav-bar.bar-positive
+    ion-nav-back-button Indietro
+    ion-nav-buttons(side='right')
+      button.button.button-clear(ng-click='addExam()') Aggiungi
   ion-content.has-header
+    ion-list
+      ion-item(ng-repeat='exam in $storage.exams')
+        h3 Exam score: {{exam.score}}
+      ion-item.item-divider Da aggiornare
+      ion-item(ng-repeat='exam in exams')
+        h3 Da aggiornare: {{exam.score}}
