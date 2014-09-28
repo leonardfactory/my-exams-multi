@@ -1,5 +1,31 @@
-$main-test-color: #333;
+$main-color: #48b2e4;
+$gray-color: #cccccc;
 
-.test-color {
-  color: $main-test-color;
+h2.exam {
+  color: $main-color;
+}
+
+p.description {
+  color: $gray-color;
+  font-size: 0.6em;
+}
+
+// Exam box
+.exam-box {
+  display: flex;
+  
+  .exam-info {
+    flex: 1;
+  }
+  
+  .exam-score {
+    width: 4em;
+    text-align: right;
+    
+    p {
+      font-size: 2.5em;
+      margin: auto;
+      overflow: visible;
+    }
+  }
 }

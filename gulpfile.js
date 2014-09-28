@@ -9,6 +9,7 @@ var sourcemaps      = require('gulp-sourcemaps');
 var ngAnnotate      = require('gulp-ng-annotate');
 var ngTemplateCache = require('gulp-angular-templatecache');
 var minifyCss       = require('gulp-minify-css');
+var autoprefixer    = require('gulp-autoprefixer');
 var jade    = require('gulp-jade');
 var rename  = require('gulp-rename');
 var sh      = require('shelljs');
@@ -57,6 +58,7 @@ gulp.task('style', function() {
   gulp.src(paths.style)
     .pipe(sass())
     .pipe(concat('style.css'))
+    .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
     .pipe(gulp.dest('./www/css/'));
 });
 

@@ -17,9 +17,11 @@ app.controller 'ExamsController',
         
       @$scope.saveExam = =>
         @$scope.$storage.exams = [] if not @$scope.$storage.exams?
+        
+        # Controllo se ci sono altri esami con lo stesso nome
+        
         @$scope.$storage.exams.push @$scope.exam
         @$scope.modal.hide()
-        console.log 'Hello! Saved.'
         
       # Resetto lo scope (exam) quando è stato inserito
       @$scope.$on 'modal.hidden', =>

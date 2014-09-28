@@ -7,5 +7,7 @@ ion-modal-view
         input(type='text', placeholder='Nome', ng-model='exam.name')
       label.item.item-input
         input(type='text', placeholder='Voto ottenuto', ng-model='exam.score')
+      label.item.item-input
+        input(type='date', placeholder='Data', ng-model='exam.date')
     div.padding
       button.button.button-positive(ng-click='saveExam()') Salva
