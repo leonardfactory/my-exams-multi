@@ -19,4 +19,6 @@ p.description {
     .exam-box .exam-score p {
       font-size: 2.5em;
       margin: auto;
-      overflow: visible; }
+      overflow: visible;
+      vertical-align: middle;
+      line-height: 1em; }

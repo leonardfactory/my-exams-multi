@@ -1,4 +1,6 @@
 var gulp    = require('gulp');
+require('gulp-help')(gulp);
+
 var gutil   = require('gulp-util');
 var bower   = require('bower');
 var concat  = require('gulp-concat');
@@ -13,6 +15,7 @@ var autoprefixer    = require('gulp-autoprefixer');
 var jade    = require('gulp-jade');
 var rename  = require('gulp-rename');
 var sh      = require('shelljs');
+var serve   = require('gulp-serve');
 
 var paths = {
   app: ['./app/scripts/**/*.coffee'],
@@ -23,7 +26,7 @@ var paths = {
 
 gulp.task('default', ['sass', 'make']);
 
-gulp.task('make', function() {
+gulp.task('make', 'Compile coffeescript files', function() {
   gulp.src(paths.app)
     .pipe(sourcemaps.init())                            // Genero le source maps
     .pipe(coffee({bare: true}).on('error', gutil.log))  // Compilo coffeescript
@@ -32,7 +35,7 @@ gulp.task('make', function() {
     .pipe(gulp.dest('./www/js/'));
 });
 
-gulp.task('make:prod', function() {
+gulp.task('make:prod', 'Compile coffeescript files for production', function() {
   gulp.src(paths.app)
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(concat('app.js'))
@@ -41,20 +44,20 @@ gulp.task('make:prod', function() {
     .pipe(gulp.dest('./www/dist/js/'));
 });
 
-gulp.task('jade', function () {
+gulp.task('jade', 'Compile templates into html', function () {
   gulp.src(paths.template)
     .pipe(jade())
     .pipe(gulp.dest('./www/templates/'))
 });
 
-gulp.task('jade:prod', function() {
+gulp.task('jade:prod', 'Compile templates into template.js for production', function() {
   gulp.src(paths.template)
     .pipe(jade())
     .pipe(ngTemplateCache({root: 'templates/'}))
     .pipe(gulp.dest('./www/dist/js/'));
 });
 
-gulp.task('style', function() {
+gulp.task('style', 'Generate css style file', function() {
   gulp.src(paths.style)
     .pipe(sass())
     .pipe(concat('style.css'))
@@ -62,7 +65,7 @@ gulp.task('style', function() {
     .pipe(gulp.dest('./www/css/'));
 });
 
-gulp.task('sass', function(done) {
+gulp.task('sass', 'Generate ionic css file', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
     .pipe(gulp.dest('./www/css/'))
@@ -74,24 +77,26 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', 'Watch for edits and recompile all above', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.app, ['make']);
   gulp.watch(paths.template, ['jade']);
   gulp.watch(paths.style, ['style']);
 });
 
-gulp.task('build',      ['sass', 'make', 'jade', 'style']);
-gulp.task('build:prod', ['sass', 'make:prod', 'jade:prod', 'style']); // todo: add `style:prod`
+gulp.task('serve', 'Serve `www` on localhost:3000', serve('./www/'));
 
-gulp.task('install', ['git-check'], function() {
+gulp.task('build',      'Compile everything for development', ['sass', 'make', 'jade', 'style']);
+gulp.task('build:prod', 'Compile everything for production',  ['sass', 'make:prod', 'jade:prod', 'style']); // todo: add `style:prod`
+
+gulp.task('install', 'Install bower components', ['git-check'], function() {
   return bower.commands.install()
     .on('log', function(data) {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
 
-gulp.task('git-check', function(done) {
+gulp.task('git-check', 'Check for git', function(done) {
   if (!sh.which('git')) {
     console.log(
       '  ' + gutil.colors.red('Git is not installed.'),
