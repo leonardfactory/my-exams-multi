@@ -31,3 +31,40 @@ p.description {
     }
   }
 }
+
+.exam-button {
+  text-align: center;
+  height: 100%;
+
+  .exam-action {
+    display: inline-block;
+    vertical-align: middle;
+    
+    &.exam-action-delete {
+      color: #ffffff;
+    }
+    
+    &.exam-action-edit {
+      color: #333333;
+    }
+  }
+}
+
+.exam-button:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.05em; /* Adjusts for spacing */
+}
+
+/* Exams deletion */
+.exam-item.ng-leave {
+  transition: all linear 0.3s;
+  opacity: 1;
+  
+  &.ng-leave-active {
+    opacity: 0;
+  }
+}
+

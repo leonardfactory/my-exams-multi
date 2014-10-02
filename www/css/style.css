@@ -22,3 +22,30 @@ p.description {
       overflow: visible;
       vertical-align: middle;
       line-height: 1em; }
+
+.exam-button {
+  text-align: center;
+  height: 100%; }
+  .exam-button .exam-action {
+    display: inline-block;
+    vertical-align: middle; }
+    .exam-button .exam-action.exam-action-delete {
+      color: #ffffff; }
+    .exam-button .exam-action.exam-action-edit {
+      color: #333333; }
+
+.exam-button:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.05em;
+  /* Adjusts for spacing */ }
+
+/* Exams deletion */
+.exam-item.ng-leave {
+  -webkit-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+  opacity: 1; }
+  .exam-item.ng-leave.ng-leave-active {
+    opacity: 0; }

@@ -24,7 +24,7 @@ var paths = {
   template: ['./app/templates/**/*.jade']
 };
 
-gulp.task('default', ['sass', 'make']);
+gulp.task('default', ['build']);
 
 gulp.task('make', 'Compile coffeescript files', function() {
   gulp.src(paths.app)

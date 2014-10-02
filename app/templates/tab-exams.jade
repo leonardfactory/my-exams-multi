@@ -3,15 +3,23 @@ ion-view(title='Esami')
     ion-nav-back-button Indietro
     ion-nav-buttons(side='right')
       button.button.button-clear(ng-click='addExam()') Aggiungi
-  ion-content.has-header
-    ion-list
-      ion-item(ng-repeat='exam in $storage.exams')
+  ion-content
+    ion-list(can-swipe='true')
+      ion-item.exam-item(ng-repeat='exam in $storage.exams', item='exam', href='#')
         div.exam-box
           div.exam-info
             h2.exam {{exam.name}}
             p.description Sostenuto il {{exam.date}}
           div.exam-score
             p.score {{exam.score}}
-      ion-item.item-divider Da aggiornare
-      ion-item(ng-repeat='exam in exams')
-        h3 Da aggiornare: {{exam.score}}
+        
+        //- Pulsanti a scorrimento
+        ion-option-button.button-stable(ng-click='edit($index)')
+          div.exam-button
+            p.exam-action.exam-action-edit Modifica
+        ion-option-button.button-assertive(ng-click='delete($index)')
+          div.exam-button
+            p.exam-action.exam-action-delete Elimina 
+      // ion-item.item-divider Da aggiornare
+      // ion-item(ng-repeat='exam in exams')
+      // h3 Da aggiornare: {{exam.score}}
